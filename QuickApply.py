@@ -1,4 +1,4 @@
-#!python3.6
+#!/usr/bin/env python
 
 import docx
 import urllib
@@ -14,6 +14,7 @@ from cover_letter import CoverLetter
 from job import Job
 from resume import Resume
 
+# TODO: refactor to classes
 class JobApplication:
 
     def __init__(self, pmt='>>> '):
@@ -156,7 +157,7 @@ class JobApplication:
         shutil.copy2(self.src_resume_path, dest_path)
 
 
-if __name__ == "__main__":
+def main():
     try:
         # JobApplication()
         job = Job()
@@ -164,3 +165,6 @@ if __name__ == "__main__":
         cover_letter = CoverLetter(job)
     except KeyboardInterrupt:
         print("\n\n~~~ Exiting (gracefully) ~~~")
+
+if __name__ == "__main__":
+    main()

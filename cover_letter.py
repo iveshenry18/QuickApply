@@ -1,4 +1,4 @@
-#!python3.6
+#!/usr/bin/env python
 
 class CoverLetter():
     pass
