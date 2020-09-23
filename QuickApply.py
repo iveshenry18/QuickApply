@@ -19,9 +19,7 @@ class JobApplication:
     def __init__(self, pmt='>>> '):
 
         self.pmt = pmt
-        
         print('\n~~~ New Application ~~~\n')
-        
         self.get_job_info()
         self.make_job_dir()
         self.select_resume_version()
@@ -160,6 +158,7 @@ class JobApplication:
 
 if __name__ == "__main__":
     try:
+        # JobApplication()
         job = Job()
         resume = Resume(job)
         cover_letter = CoverLetter(job)
