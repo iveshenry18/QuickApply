@@ -3,7 +3,7 @@ A quick CLI application for resume and cover letter file management
 
 # Filesystem Setup
 ## Resumes
-The application recognizes resumes in the working directory of the form `*\_resume.docx`
+The application recognizes resumes in the working directory of the form `*_resume.docx`
 ## Cover letter
 The application fills the file `cover_letter_stub.docx` at `{INSERTION POINT}` with contents chosen from `cover_letter_contents.xlsx`
 # Thanks
