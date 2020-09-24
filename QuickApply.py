@@ -35,6 +35,7 @@ class JobApplication:
             self.cover_letter_contents = self.select_cover_letter_contents()
         else:
             print('No cover letter options found. Continuing without custom cover letter.')
+        print('Too bad.')
         self.build_docx('cover_letter_stub.docx', os.path.join(self.job_dir, 'cover_letter.docx'))
         
 
@@ -159,10 +160,10 @@ class JobApplication:
 
 def main():
     try:
-        # JobApplication()
-        job = Job()
-        resume = Resume(job)
-        cover_letter = CoverLetter(job)
+        JobApplication()
+        # job = Job()
+        # resume = Resume(job)
+        # cover_letter = CoverLetter(job)
     except KeyboardInterrupt:
         print("\n\n~~~ Exiting (gracefully) ~~~")
 
