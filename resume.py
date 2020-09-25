@@ -1,15 +1,14 @@
-#!/usr/bin/env python
-
 import glob
 import os
 import shutil
+import docx
+from document import Document
 
-class Resume():
+class Resume(Document):
     """A resume for a given job posting"""
 
     def __init__(self, job, pmt='>>> '):
-        self.pmt = pmt
-        self.job = job
+        super().__init__(job, pmt)
 
         self.select_resume_version()
         self.copy_resume()

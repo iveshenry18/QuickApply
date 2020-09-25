@@ -1,32 +1,28 @@
-#!/usr/bin/env python
-
 import os
 import pandas as pd
 import docx
+from document import Document
 
-class CoverLetter():
+class CoverLetter(Document):
     """A cover letter for a given job posting"""
     
     def __init__(self, job, pmt='>>> '):
-        self.pmt = pmt
-        self.job = job
+        super().__init__(job, pmt)
 
-        self.make_cover_letter()
-
-    # TODO
-    def make_cover_letter(self):
-        """Build cover letter from user input, save to job_dir"""
         self.cover_letter_options = self.get_dicts_from_xlsx("cover_letter_contents.xlsx", sheet_name="cover_letter_contents")
         if self.cover_letter_options:
             self.cover_letter_contents = self.select_cover_letter_contents()
         else:
             print('No cover letter options found. Continuing without custom cover letter.')
-        print('Too bad.')
-        self.build_docx('cover_letter_stub.docx', os.path.join(self.job.job_dir, 'cover_letter.docx'))
+        self.fill_doc('cover_letter_stub.docx', os.path.join(self.job.job_dir, 'cover_letter.docx'))
 
-    def build_docx(self, filename, new_filename):
-        doc = docx.Document(filename)
+
+    def fill_doc(self, filename, new_filename):
+        doc_body = '\n\n'.join(self.cover_letter_contents)
+        self.find_and_replace('{INSERTION POINT}', doc_body)
+        self.doc.save(os.path.join(self.job.job_dir, "cover_letter.docx"))
         # TODO: build file
+        print('ok?')
 
 
     def get_dicts_from_xlsx(self, filename, sheet_name=0):
@@ -47,4 +43,8 @@ class CoverLetter():
             #  oh my god this is so bad
             print(f"\t({i:>2}) {option['Type']:<14} {'(' + option['Focus'] + ')':<12}: {option['Section Name']:<36} \"{option['Contents'][:32]}...\"")
         cl_choices_input = input(self.pmt)
-        return [self.cover_letter_options[int(i)] for i in cl_choices_input.split(',')]
+        return [self.cover_letter_options[int(i)]['Contents'] for i in cl_choices_input.split(',')]
+
+    
+    def init_doc(self):
+        return docx.Document('cover_letter_stub.docx')

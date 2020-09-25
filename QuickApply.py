@@ -13,7 +13,6 @@ from docx2pdf import convert
 from cover_letter import CoverLetter
 from job import Job
 from resume import Resume
-    
 # Tanner's code (bless)
     # # Create cover letter
     # doc = docx.Document(os.path.join('cover_letter.docx'))
@@ -47,19 +46,21 @@ from resume import Resume
     # Open the directory that the posting is in
     # os.startfile(self.job_dir)
 
-def print_doc(self, doc):
+def print_doc(doc):
     i = 0
     for p in doc.paragraphs:
         print('[',i,'] \t', p.text)
         print('\t~~~~~~~')
         i = i + 1
 
+
+
 def main():
     try:
         print('\n~~~ New Application ~~~\n')
         job = Job()
-        resume = Resume(job)
-        cover_letter = CoverLetter(job)
+        Resume(job)
+        CoverLetter(job)
     except (KeyboardInterrupt, EOFError):
         print("\n\n~~~ Exiting (gracefully) ~~~")
 
