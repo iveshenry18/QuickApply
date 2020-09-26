@@ -11,16 +11,19 @@ class Resume(Document):
         super().__init__(job, pmt)
 
         self.select_resume_version()
-        self.copy_resume()
 
     # TODO: refactor to match cl
     def select_resume_version(self):
         """Select resume from user input and copy to job_dir"""
         resume_types = glob.glob('*resume*.docx')
-        print('Which resume version do you want to use?')
-        for i, res_type in enumerate(resume_types):
-            print(f'\t({i}) {res_type[:-12]}')
-        self.src_resume_path = resume_types[int(input(self.pmt))]
+        if len(resume_types) > 0:
+            print('Which resume version do you want to use?')
+            for i, res_type in enumerate(resume_types):
+                print(f'\t({i}) {res_type[:-12]}')
+            self.src_resume_path = resume_types[int(input(self.pmt))]
+            self.copy_resume()
+        else:
+            print("No resume versions found. Continuing.")
 
     def copy_resume(self):
         """Copy over resume files"""
