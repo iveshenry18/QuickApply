@@ -12,7 +12,6 @@ class Resume(Document):
 
         self.select_resume_version()
 
-    # TODO: refactor to match cl
     def select_resume_version(self):
         """Select resume from user input and copy to job_dir"""
         resume_types = glob.glob('*resume*.docx')
