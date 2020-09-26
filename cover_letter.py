@@ -30,7 +30,7 @@ class CoverLetter(Document):
     def get_dicts_from_xlsx(self, filename, dtypes=[], sheet_name=0):
         """Read filename xlsx to dict using pandas"""
         try:
-            xls_df = pd.read_excel(filename, sheet_name, header=0, dtype=dtypes)  # TODO: improve dtypes
+            xls_df = pd.read_excel(filename, sheet_name, header=0, dtype=dtypes)
             df_dicts = xls_df.to_dict('records')
             return df_dicts
         except Exception as e:
