@@ -3,10 +3,14 @@ A quick CLI application for resume and cover letter file management
 
 # Development Environment
 QuickApply was developed in WSL Ubuntu using venv. Refer to requirements.txt for necessary modules.
-### On using in Windows
+## On installing as a script
+### Windows
 My current solution for using the program conveniently in Windows is a shortcut in my Resumes folder with the following command:
 
 `C:\Windows\System32\cmd.exe /k wsl {dev dir}/QuickApply/venv/bin/python {dev dir}/QuickApply/QuickApply.py`
+
+### MacOS
+I've created a simple `.command` file that can be copied to your working directory, and must be modified with the root directory of your clone of QuickApply. This only works once the necessary packages have been installed.
 
 # Filesystem Setup for Use
 The application creates folders of the form `./Specific/{Company Name}/{Role mm-dd-yy}`
