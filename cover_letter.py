@@ -13,8 +13,14 @@ class CoverLetter(Document):
         # TODO: forgiveness not permission file presence check
         self.cover_letter_options = self.get_dicts_from_xlsx("cover_letter_contents.xlsx", sheet_name="cover_letter_contents")
         if self.cover_letter_options:
-            self.cover_letter_contents = self.select_cover_letter_contents()
-            self.fill_doc('cover_letter_stub.docx', os.path.join(self.job.job_dir, 'cover_letter.docx'))
+            self.cover_letter_contents = []
+            try:
+             self.cover_letter_contents = self.select_cover_letter_contents()
+            except TypeError as err:
+                print(err)
+                print('Proceeding without custom cover letter')
+            finally:
+                self.fill_doc('cover_letter_stub.docx', os.path.join(self.job.job_dir, 'cover_letter.docx'))
         else:
             print('No cover letter options found. Continuing without custom cover letter.')
 
@@ -41,19 +47,25 @@ class CoverLetter(Document):
     def select_cover_letter_contents(self):
         """Select cover letter contents from user input"""
         print("Which paragraphs do you want to use in your cover letter?")
+        self.print_option(0, {
+            'Type': 'Type',
+            'Focus': 'Focus',
+            'Section Name': 'Section Name',
+            'Contents': 'Contents'
+        })
         for i, option in enumerate(self.cover_letter_options):
             self.print_option(i, option)
         cl_choices_input = input(self.pmt)
         return [self.cover_letter_options[int(i)]['Contents'] for i in cl_choices_input.split(',')]
 
-    def print_option(self, i, option):
-        """Pretty print option (cleaner now so I don't have to debug anymore shees"""
+    def print_option(self, i: int, option):
+        """Pretty print option (cleaner now so I don't have to debug anymore sheesh)"""
         print(
             f"\t({i:>2}) "
             f"{option['Type']:<14} "
-            f"{'(' + option['Focus'] + ')':<12}: " 
+            f"({option['Focus']:<12}): " 
             f"{option['Section Name']:<36} "
-            f"\"{option['Contents'][64]:<32}...\""
+            f"\"{option['Contents'][:64]:<32}...\""
             )
     
     def init_doc(self):
